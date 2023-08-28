@@ -1,0 +1,5 @@
+<routes>
+    <route frontName="index">
+        <module>Framework</module>
+    </route>
+</routes>

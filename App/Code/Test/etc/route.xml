@@ -1,0 +1,5 @@
+<routes>
+    <route frontName="test">
+        <module>Test</module>
+    </route>
+</routes>
