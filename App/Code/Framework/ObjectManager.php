@@ -32,7 +32,18 @@ class ObjectManager
 
     public function get(string $className): ?object
     {
-        return $this->autoloader->get($className);
+        $result = $this->autoloader->get($className);
+        $this->autoloader->set($className, $result);
+        return $result;
+    }
+
+    public function create(string $classname): ?object
+    {
+        $this->autoloader->set($classname, null);
+        $result = $this->autoloader->get($className);
+        $this->autoloader->set($className, $result);
+        return $result;
+        
     }
 
     public function setDefinition(string $key, $definition): void

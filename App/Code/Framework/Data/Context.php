@@ -7,7 +7,7 @@ use App\Code\Framework\Data\DataObject;
 class Context extends DataObject
 {
     const DEFAULT_ACTION_PATH = 'index/index/index';
-    
+
     const DEFUALT_PATH = 'index';
 
     const PATH_LIMIT = 3;
@@ -18,13 +18,13 @@ class Context extends DataObject
             $paths = explode('/', substr($this->getPathInfo(), 1) ?: self::DEFAULT_ACTION_PATH);
             $actionPath = '';
             $controllerPath = '';
-            for ($i=0; $i < self::PATH_LIMIT; $i++) {
+            for ($i = 0; $i < self::PATH_LIMIT; $i++) {
                 $path  = $paths[$i] ?? self::DEFUALT_PATH;
 
                 if ($i == 0) {
                     $this->setFrontName($path);
                 } else {
-                    $controllerPath .= 
+                    $controllerPath .=
                         ucfirst($path) . ($i < self::PATH_LIMIT - 1 ? '\\' : '');
                 }
 

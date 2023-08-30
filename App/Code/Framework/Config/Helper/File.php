@@ -13,9 +13,12 @@ class File
 
     private Context $context;
 
-    public function __construct(Context $context)
+    private Merger $merger;
+
+    public function __construct(Context $context, Merger $merger)
     {
         $this->context = $context;
+        $this->merger = $merger;
     }
 
     public function getDirectoryFiles($directory): \Generator
@@ -55,27 +58,7 @@ class File
         return $this->context->getRootDirectory();
     }
 
-    public function mergeXmlFiles($outputFile, ...$inputFile) {
-        // Create a new DOMDocument object and set its properties
-        $dom = new \DOMDocument('1.0', 'UTF-8');
-        $dom->formatOutput = true;
-      
-        // Create the root element
-        $root = $dom->createElement('root');
-        $dom->appendChild($root);
-      
-        // Load each input file into a SimpleXMLElement object
-        foreach ($inputFile as $file) {
-          $xml = simplexml_load_file($file);
-      
-          // Add each child node to the root element
-          foreach ($xml->children() as $child) {
-            $node = dom_import_simplexml($child);
-            $root->appendChild($dom->importNode($node, true));
-          }
-        }
-      
-        // Save the merged XML file
-        $dom->save($outputFile);
-      }
+    public function merge($outputFile, ...$inputFile) {
+        $this->merger->merge($outputFile, ...$inputFile);
+    }
 }

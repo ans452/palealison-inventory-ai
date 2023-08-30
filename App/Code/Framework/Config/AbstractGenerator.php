@@ -18,7 +18,7 @@ abstract class AbstractGenerator
     public function generate(): void
     {
         if ($this->moduleScopeTargetPath) {
-            $this->fileHelper->mergeXmlFiles(
+            $this->fileHelper->merge(
                 $this->fileHelper->getRootDirectory() . '/var' . $this->moduleScopeTargetPath,
                 ...$this->fileHelper->getAllFiles($this->moduleScopeTargetPath)
             );
